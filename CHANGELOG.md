@@ -1,5 +1,28 @@
 # Changelog
 
+
+
+## 2026-10-27 (v1.29.3, a rule carries a test and a review together)
+
+- `standards-local/proofs.json`: a rule's value may be a list of records, so a test (or ci) proof and a
+  dated `review` record sit on the same rule and the rule stays `proved` instead of dropping to
+  `attested`. The single-object form is unchanged. A review beside a test is a companion and is not held
+  to the "weaker than the rule's check" limit; an expired or broken review is a problem line and the test
+  still counts; a malformed list entry is a problem line naming its place (`rule[1]`); an empty list is a
+  problem. The reserved keys are untouched.
+- New optional registry field `requires_review: true`: such a rule with a test alone reads `unverified`
+  with a note until a current review is also recorded. No rule carries it yet, so nothing changes for a
+  consumer that changes nothing.
+- CONSUMING.md documents the list form with a neutral example and the reporting table.
+
+## 2026-10-27 (v1.29.2, ops center design, api backed docs home)
+
+- `opscenter/DESIGN.md` sections 5.2, 5.3, 6 and the R6 row: the `docs_home` reference adapter gains
+  an `api` variant for a docs home that is not a git repo. Every write passes a scope proof against
+  the allowed roots (`docs.allowed_roots`), deletes are refused, the body hash is checked and the
+  page is read back. Parameter `docs.adapter` picks the variant (`git` stays the default). The
+  section gives the acceptance test.
+
 ## 2026-10-27 (v1.29.1, ops center design, writer rule live switch)
 
 - `opscenter/DESIGN.md` sections 2.5, 4.2, 6 and the R4 row: a "Writer rules" card on the Core page
